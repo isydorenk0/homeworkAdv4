@@ -6,8 +6,8 @@ import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
     public static void main(String[] args) throws ParseException {
@@ -29,9 +29,9 @@ public class Main {
             return;
         }
         long diffMs = ChronoUnit.MILLIS.between(date, today);
-        long diffSec = (diffMs / 1000) % 60;
-        long diffMin = (diffMs / (60 * 1000)) % 60;
-        long diffHrs = (diffMs / (60 * 60 * 1000)) % 24;
+        long diffSec = TimeUnit.SECONDS.convert(diffMs, TimeUnit.MILLISECONDS) % 60;
+        long diffMin = TimeUnit.MINUTES.convert(diffMs, TimeUnit.MILLISECONDS) % 60;
+        long diffHrs = TimeUnit.HOURS.convert(diffMs, TimeUnit.MILLISECONDS) % 24;
         // використовую Період, щоб самому не рахувати кількість днів і місяців
         Period diffDate = Period.between(date.toLocalDate(), today.toLocalDate());
 

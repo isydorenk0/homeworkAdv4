@@ -24,13 +24,13 @@ public class Decrypt {
         try {
             if (file.getName().equals("preposition.txt")) {
                 Files.lines(file.toPath()).forEach(s -> string.append("\\b(").append(s).append(")\\b|"));
+                string.deleteCharAt(string.length() - 1); // Delete last '|' from the string
             } else {
                 Files.lines(file.toPath()).forEach(s -> string.append(s).append("\n"));
             }
         } catch (Exception e) {
             throw new Exception(Arrays.toString(e.getStackTrace()));
         }
-        string.deleteCharAt(string.length() - 1);
         return string.toString();
     }
 
